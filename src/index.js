@@ -7,7 +7,10 @@ import { createStore, combineReducers } from 'redux';
 
 /*** REDUCERS ***/
 
-const todo = (state, action) => {
+const todo = (
+    state,
+    action
+) => {
     switch (action.type) {
         case 'ADD_TODO':
             return {
@@ -29,7 +32,10 @@ const todo = (state, action) => {
     }
 };
 
-const todos = (state = [], action) => {
+const todos = (
+    state = [],
+    action
+) => {
     switch (action.type) {
         case 'ADD_TODO':
             return [
@@ -208,9 +214,7 @@ const mapStateToLinkProps = (
     ownProps
 ) => {
     return {
-        active:
-        ownProps.filter ===
-        state.visibilityFilter
+        active: ownProps.filter === state.visibilityFilter
     }
 };
 const mapDispatchToLinkProps = (
