@@ -1,4 +1,4 @@
-# Getting Started With Redux
+# Building React Applications with Idiomatic Redux
 ## A course by Dan Abramov
 
 ### This is my completed code following along with the above tutorial.
