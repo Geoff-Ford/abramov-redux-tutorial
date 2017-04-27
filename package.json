@@ -10,7 +10,9 @@
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
     "react-router": "v3",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "redux-logger": "^3.0.1",
+    "redux-promise": "^0.5.3"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"
