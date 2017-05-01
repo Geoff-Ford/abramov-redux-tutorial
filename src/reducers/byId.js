@@ -1,18 +1,12 @@
 
-const byId = (
-    state = {},
-    action
-) => {
-    switch (action.type) {
-        case 'RECEIVE_TODOS':
-            const nextState = {...state};
-            action.response.map(todo => {
-                nextState[todo.id] = todo;
-            });
-            return nextState;
-        default:
-            return state;
+const byId = (state = {}, action) => {
+    if (action.response) {
+        return {
+            ...state,
+            ...action.response.entities.todos
+        };
     }
+    return state;
 };
 
 export default byId;

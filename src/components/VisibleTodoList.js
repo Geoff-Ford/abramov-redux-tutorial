@@ -4,7 +4,8 @@ import { withRouter } from 'react-router';
 
 import TodoList from './TodoList';
 import * as actions from '../actions';
-import { getVisibleTodos } from '../reducers';
+import { getVisibleTodos, getIsFetching, getErrorMessage } from '../reducers';
+import FetchError from './FetchError';
 
 
 
@@ -19,13 +20,26 @@ let VisibleTodoList = () => ({
     },
     fetchData() {
         const { filter, fetchTodos } = this.props;
-        fetchTodos(filter);
+        fetchTodos(filter)
+            .then(() => console.log('Done!!!'));
     },
     render() {
-        const {toggleTodo, ...rest} = this.props;
+        const {toggleTodo, todos, errorMessage, isFetching} = this.props;
+        if(isFetching && !todos.length) {
+            return <p>Loading...</p>;
+        }
+        if(errorMessage && !todos.length) {
+            return (
+                <FetchError
+                    message={errorMessage}
+                    onRetry={() => this.fetchData()}
+                />
+            );
+        }
+
         return (
             <TodoList
-                {...rest}
+                todos={todos}
                 onTodoClick={toggleTodo}
             />
         );
@@ -59,6 +73,8 @@ const mapStateToTodoListProps = (state, { params }) => {
     const filter = params.filter || 'all';
     return {
         todos: getVisibleTodos(state, filter),
+        errorMessage: getErrorMessage(state, filter),
+        isFetching: getIsFetching(state, filter),
         filter
     }
 };
